@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Chrome and Firefox devtools extension for debugging FicusJS applications",
   "scripts": {
-    "build": "web-ext build -s src",
+    "build": "web-ext build -s src --overwrite-dest",
     "dev": "run-p dev:*",
     "dev:test": "http-server",
     "dev:ext": "web-ext run -s src",
