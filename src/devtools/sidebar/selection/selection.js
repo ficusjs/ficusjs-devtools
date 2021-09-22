@@ -1,6 +1,8 @@
 /* global browser */
 import { isFicusCustomElement } from './is-ficus-custom-element.js'
-import { getProps, getPropsDefinition } from './get-props.js'
+import { getProps, getPropsDefinition } from './props.js'
+import { getComputed } from './computed.js'
+import { getState } from './state.js'
 
 function handleError (error) {
   if (error.isError) {
@@ -26,12 +28,16 @@ const scriptToRun = `(function () {
   ${isFicusCustomElement}
   ${getProps}
   ${getPropsDefinition}
+  ${getComputed}
+  ${getState}
 
   return {
     tagName: $0.tagName.toLowerCase(),
     isFicusCustomElement: isFicusCustomElement($0),
     props: getProps($0),
-    propsDef: getPropsDefinition($0)
+    propsDef: getPropsDefinition($0),
+    computed: getComputed($0),
+    state: getState($0)
   }
 })()`
 

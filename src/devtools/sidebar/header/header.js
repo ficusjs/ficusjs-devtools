@@ -1,4 +1,4 @@
-import { createComponent, withEventBus } from '../../lib/ficusjs.mjs'
+import { createComponent, withEventBus } from '../../../lib/ficusjs.mjs'
 
 export function createHeaderComponent (eventBus) {
   createComponent(

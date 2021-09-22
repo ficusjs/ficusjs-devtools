@@ -145,6 +145,10 @@ button.html-tag:focus {
   font-style: italic;
 }
 
+.prop .prop {
+  padding-left: 1rem;
+}
+
 /* media queries */
 
 @media (prefers-color-scheme: dark) {

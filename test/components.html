@@ -17,7 +17,7 @@
       render () {
         return html`
           <h1>Component test</h1>
-          <child-comp person-name="Matt"></child-comp>
+          <child-comp person-name="Matt" siblings='["Michelle","Graeme","Imogen"]'></child-comp>
           <child-comp></child-comp>
         `
       }
@@ -31,6 +31,10 @@
         },
         age: {
           type: Number
+        },
+        siblings: {
+          type: Object,
+          default: []
         }
       },
       render () {
@@ -38,6 +42,16 @@
           <p>
             Hi, there! My name is ${this.props.personName}
           </p>
+          ${this.props.siblings && Array.isArray(this.props.siblings) && this.props.siblings.length > 0
+            ? html`<div>
+              <p>My siblings are:</p>
+              <ul>
+                ${this.props.siblings.map(s => html`<li>${s}</li>`)}
+              </ul>
+              </div>
+            `
+            : html`<span />`}
+          <fav-comp favourites='{"Favourite biscuit":"Bourbon","Favourite beer":"Whitstable Bay"}'></fav-comp>
           <date-comp></date-comp>
         `
       }
@@ -54,6 +68,26 @@
           <p>
             Todays date is ${this.today}
           </p>
+        `
+      }
+    })
+
+    createCustomElement('fav-comp', {
+      renderer,
+      props: {
+        favourites: {
+          type: Object,
+          default: {}
+        }
+      },
+      render () {
+        return html`
+          ${this.props.favourites && Object.keys(this.props.favourites).length > 0
+          ? html`<ul>
+                ${Object.keys(this.props.favourites).map(k => html`<li>${k} is ${this.props.favourites[k]}</li>`)}
+              </ul>
+            `
+          : html`<span />`}
         `
       }
     })
