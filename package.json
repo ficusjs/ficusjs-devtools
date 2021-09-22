@@ -9,7 +9,7 @@
     "dev:ext": "web-ext run -s src",
     "predev": "mkdirp src/lib && run-p copy:*",
     "copy:ficusjs": "ncp ./node_modules/ficusjs/dist/index.mjs src/lib/ficusjs.mjs",
-    "copy:polyfill": "ncp ./node_modules/webextension-polyfill/dist/browser-polyfill.js src/lib/browser-polyfill.js",
+    "copy:polyfill": "ncp ./node_modules/webextension-polyfill/dist/browser-polyfill.min.js src/lib/browser-polyfill.js",
     "lint:styles": "stylelint \"src/**/*.css\"",
     "lint:js": "standard \"src/devtools/**/*.js\""
   },
