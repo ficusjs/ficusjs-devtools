@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devtools components test</title>
+</head>
+<body>
+  <app-comp></app-comp>
+  <script type="module">
+    import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
+    import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/htm'
+
+    createCustomElement('app-comp', {
+      renderer,
+      render () {
+        return html`
+          <h1>Component test</h1>
+          <child-comp person-name="Matt"></child-comp>
+          <child-comp></child-comp>
+        `
+      }
+    })
+
+    createCustomElement('child-comp', {
+      renderer,
+      props: {
+        personName: {
+          type: String
+        },
+        age: {
+          type: Number
+        }
+      },
+      render () {
+        return html`
+          <p>
+            Hi, there! My name is ${this.props.personName}
+          </p>
+          <date-comp></date-comp>
+        `
+      }
+    })
+
+    createCustomElement('date-comp', {
+      computed: {
+        today () {
+          return new Date().toLocaleDateString()
+        }
+      },
+      render () {
+        return `
+          <p>
+            Todays date is ${this.today}
+          </p>
+        `
+      }
+    })
+  </script>
+</body>
+</html>

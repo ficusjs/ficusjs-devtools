@@ -1,0 +1,15 @@
+{
+  "description": "Chrome and Firefox devtools extension for debugging FicusJS applications",
+  "manifest_version": 2,
+  "name": "FicusJS devtools",
+  "version": "0.1.0",
+  "author": "FicusJS",
+  "homepage_url": "https://github.com/ficusjs/ficusjs-devtools",
+  "icons": {
+    "48": "icons/ficus-icon.png"
+  },
+  "permissions": [
+      "<all_urls>"
+  ],
+  "devtools_page": "devtools/devtools.html"
+}

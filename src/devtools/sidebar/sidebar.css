@@ -1,0 +1,166 @@
+/* variables */
+:root {
+  --body-background: white;
+  --body-color: black;
+  --border-color: lightgray;
+  --html-tag-color: teal;
+  --prop-key-color: darkmagenta;
+}
+
+/* layout */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: var(--body-background);
+  color: var(--body-color);
+  font-size: 90%;
+}
+
+details summary {
+  user-select: none;
+}
+
+details {
+  margin-top: 1rem;
+}
+
+details summary + * {
+  margin-left: 2rem;
+  margin-top: 1rem;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+label {
+  display: block;
+}
+
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+/* utilities */
+
+/* Mozilla uses a pseudo-element to show focus on buttons, */
+@supports (-moz-appearance:none) { /* Mozilla-only */
+  button::-moz-focus-inner { /* reset any predefined properties */
+    border: none;
+    padding: 0;
+  }
+
+  button:focus { /* add outline to focus pseudo-class */
+    outline-style: dotted;
+    outline-width: 1px;
+  }
+}
+
+.html-tag {
+  color: var(--html-tag-color);
+}
+
+button.html-tag {
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  font: inherit;
+}
+
+button.html-tag:focus {
+  outline: none;
+}
+
+.html-tag::before {
+  content: "<";
+}
+
+.html-tag::after {
+  content: ">";
+}
+
+.section {
+  padding: 1rem;
+}
+
+.header {
+  height: 35px;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.d-flex {
+  display: flex;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.icon-color-gray {
+  fill: gray;
+}
+
+.form-search input {
+  border: none;
+  margin: 0;
+  background: transparent;
+  font-size: 14px;
+  color: var(--body-color);
+}
+
+.form-search input:focus {
+  outline: none;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.prop .key {
+  color: var(--prop-key-color);
+}
+
+.prop .value:empty::after {
+  content: "undefined";
+  display: inline-block;
+  color: gray;
+  font-style: italic;
+}
+
+/* media queries */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-background: black;
+    --body-color: white;
+    --border-color: #333;
+    --html-tag-color: #82cbb2;
+    --prop-key-color: magenta;
+  }
+}
+
+html[data-theme="dark"] {
+  --body-background: black;
+  --body-color: white;
+  --border-color: #333;
+  --html-tag-color: #82cbb2;
+  --prop-key-color: magenta;
+}
