@@ -10,6 +10,7 @@
   <app-comp></app-comp>
   <script type="module">
     import { createCustomElement } from 'https://cdn.skypack.dev/ficusjs@3/custom-element'
+    import { createComponent } from 'https://cdn.skypack.dev/ficusjs@3/component'
     import { html, renderer } from 'https://cdn.skypack.dev/@ficusjs/renderers@3/htm'
 
     createCustomElement('app-comp', {
@@ -19,6 +20,7 @@
           <h1>Component test</h1>
           <child-comp person-name="Matt" siblings='["Michelle","Graeme","Imogen"]'></child-comp>
           <child-comp></child-comp>
+          <state-comp></state-comp>
         `
       }
     })
@@ -88,6 +90,27 @@
               </ul>
             `
           : html`<span />`}
+        `
+      }
+    })
+
+    createComponent('state-comp', {
+      state () {
+        return {
+          count: 0
+        }
+      },
+      increment () {
+        this.setState(state => ({ ...state, count: state.count + 1 }))
+      },
+      render () {
+        return html`
+          <div>
+            <p>
+              Count is ${this.state.count}
+            </p>
+            <button type="button" onclick="${this.increment}">Increment</button>
+          </div>
         `
       }
     })
