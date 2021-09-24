@@ -1,4 +1,5 @@
 (function () {
+  const elementsCache = new WeakMap()
   window._FICUSJS_DEVTOOLS_ELEMENT_INSPECT_ = window._FICUSJS_DEVTOOLS_ELEMENT_INSPECT_ || function (ele) {
     function isFicusCustomElement (element) {
       return (element.ficusCustomElement && element.ficusCustomElement === element.tagName.toLowerCase()) ||
@@ -34,7 +35,7 @@
       if (isFicusCustomElement(element)) {
         const props = element._props
         const np = {}
-        Object.keys(props).forEach(p => {
+        Object.keys(props).forEach(function (p) {
           const propDef = props[p]
           const pd = [
           `type: ${getType(props[p])}`
@@ -52,7 +53,7 @@
       if (isFicusCustomElement(element)) {
         const computed = element._computed
         const nc = {}
-        Object.keys(computed).forEach(p => {
+        Object.keys(computed).forEach(function (p) {
           nc[p] = element[p]
         })
         return nc
@@ -63,6 +64,16 @@
       if (isFicusCustomElement(element) && element.state && element._state) {
         return element._state
       }
+    }
+
+    // create a hook for updating the sidebar panel after changes to the component
+    if (isFicusCustomElement(ele) && !elementsCache.has(ele)) {
+      const existingListCycleMethod = ele._callLifecycleMethods
+      ele._callLifecycleMethods = function () {
+        existingListCycleMethod.apply(ele)
+        window.postMessage({ action: 'element-changed' }, '*')
+      }
+      elementsCache.set(ele, true)
     }
 
     return {

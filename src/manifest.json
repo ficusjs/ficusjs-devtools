@@ -11,5 +11,22 @@
   "permissions": [
       "<all_urls>"
   ],
-  "devtools_page": "devtools/devtools.html"
+  "background": {
+    "scripts": [
+      "lib/browser-polyfill.js",
+      "devtools/background/background.js"
+    ]
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": [
+      "lib/browser-polyfill.js",
+      "devtools/content-scripts/inspect-applicator.js",
+      "devtools/content-scripts/messaging.js"
+    ],
+    "run_at": "document_start",
+    "all_frames": true
+  }],
+  "devtools_page": "devtools/devtools.html",
+  "web_accessible_resources": ["devtools/sidebar/selection/inspect.js"]
 }

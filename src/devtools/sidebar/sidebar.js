@@ -1,8 +1,25 @@
+/* global browser */
 import { createEventBus, createAppState } from '../../lib/ficusjs.mjs'
 import { createHeaderComponent } from './header/header.js'
 import { createContentComponent } from './content/content.js'
-import { initSelection } from './selection/selection.js'
+import { initSelection, updateElementView } from './selection/selection.js'
 import './theme.js'
+
+// Create a connection to the background page
+const backgroundPageConnection = browser.runtime.connect({
+  name: 'sidebar'
+})
+
+backgroundPageConnection.postMessage({
+  name: 'init',
+  tabId: browser.devtools.inspectedWindow.tabId
+})
+
+backgroundPageConnection.onMessage.addListener(function (msg) {
+  if (msg.action === 'element-changed') {
+    updateElementView(eventBus)
+  }
+})
 
 // an event bus
 const eventBus = createEventBus()

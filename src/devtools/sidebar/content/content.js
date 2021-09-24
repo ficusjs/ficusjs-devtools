@@ -32,7 +32,8 @@ export function createContentComponent (eventBus, store) {
           canRenderState () {
             return this.store.state.data &&
               this.store.state.data.isFicusCustomElement &&
-              this.store.state.data.localState
+              this.store.state.data.localState &&
+              Object.keys(this.store.state.data.localState).length > 0
           }
         },
         render () {
