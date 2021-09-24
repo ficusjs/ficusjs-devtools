@@ -9,7 +9,7 @@
     "48": "icons/ficus-icon.png"
   },
   "permissions": [
-      "<all_urls>"
+    "activeTab"
   ],
   "background": {
     "scripts": [
